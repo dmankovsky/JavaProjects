@@ -52,7 +52,7 @@ public class Gearbox {
         private int gearNumber;
         private double ratio;
 
-        public Gear(int gearNumber, double ratio) {
+        public Gear(int gearNumber, double ratio) { // instances of the Gear class have access to all the methods of outer Gearbox class, even private
             this.gearNumber = gearNumber; // "this" refers to the Gear class. Not the Gearbox (private identifier).
             // to refer to the superclass' gearnumber parameter use Gearbox.this.gearNumber. The latter was renamed to currentGear
             this.ratio = ratio;
@@ -66,7 +66,4 @@ public class Gearbox {
             return ratio;
         }
     }
-
-
-
 }
