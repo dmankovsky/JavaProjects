@@ -1,0 +1,55 @@
+@startuml
+'Alice -> Bob: Authentication Request
+'Bob --> Alice: Authentication Response
+
+'Alice -> Bob: Another authentication Request
+'Alice <-- Bob: another authentication Response
+
+skinparam defaultTextAlignment center
+' TODO: define procedure instead of !define
+
+!define setSubText($text) \n<color:gray>$text</color>
+!define optionForIsRelease($text) \n<color:red>$text</color>
+!define optionForPushToDocker($text) \n<color:blue>$text</color>
+
+!$CHECKOUT = "Checkout from SCM" + setSubText("Phase 1")
+!$DETERMINE_VERSION = "Determine version" + setSubText("Phase 2")
+!$DIALOGUE = "Dialogue Box:\nRelease version X.X.X\nFeature version X.X.X+1" \
++ optionForIsRelease("Is release? [ ]") \
++ optionForPushToDocker("Push Docker to Openshift? [ ]") + "\n" +  setSubText("Phase 3")
+!$RELEASE_BRANCH = "Release or feature branch?" + setSubText("Depending on Phase 3")
+'!$USER_INPUT = "Prompt for release" + setSubText("Phase 4")
+!$BUILD = "Build" + setSubText("Phase 4")
+!$SONARQUBE_ANALYSIS = "SonarQube analysis" + setSubText("Phase 5")
+!$RELEASE = "Release" + setSubText("Phase 7")
+!$DO_RELEASE = "Deploy release to artifactory"
+!$UPDATE_SNAPSHOT_VERSION = "Update snapshot version in pom.xml"
+!$COMMIT = "Commit to repo"
+!$DEPLOY_SNAPSHOT = "Deploy snapshot to artifactory"
+!$PUBLISH_DOCS = "Publish documention"
+!$DOCKER_PUSH_TO_OPENSHIFT = "Push Docker container to Openshift"
+
+start
+
+:$CHECKOUT;
+:$DETERMINE_VERSION;
+:$DIALOGUE;
+:$BUILD;
+:$SONARQUBE_ANALYSIS;
+if ($RELEASE_BRANCH) then (setSubText(runs if) optionForIsRelease("Is release? [x]"))
+skinparam partitionBorderColor red
+partition "Release"{
+:$DO_RELEASE \n $UPDATE_SNAPSHOT_VERSION \n $COMMIT\nsetSubText("Phase 6");
+:$PUBLISH_DOCS setSubText("Phase 8");
+}
+else (setSubText("runs always"))
+skinparam partitionBorderColor black
+partition "Feature"{
+:$DEPLOY_SNAPSHOT setSubText("Phase 7");
+}
+endif
+:optionForPushToDocker(Push Docker to Openshift? [x]) \n$DOCKER_PUSH_TO_OPENSHIFT setSubText("Phase 10");
+
+stop
+
+@enduml
