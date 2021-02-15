@@ -1,7 +1,7 @@
 package com.danielmankovsky;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
 
 public class Album {
     private String name;
@@ -20,7 +20,7 @@ public class Album {
     }
 
 
-    public boolean addToPlayList(int trackNumber, List<Song> playList) {
+    public boolean addToPlayList(int trackNumber, LinkedList<Song> playList) {
         Song checkedSong = this.songs.findSong(trackNumber);
         if (checkedSong!=null){
             playList.add(checkedSong);
@@ -30,7 +30,7 @@ public class Album {
         return false;
     }
 
-    public boolean addToPlayList(String title, List<Song> playList) {
+    public boolean addToPlayList(String title, LinkedList<Song> playList) {
         Song checkedSong = songs.findSong(title);
         if(checkedSong != null) {
             playList.add(checkedSong);
@@ -40,13 +40,13 @@ public class Album {
         return false;
     }
 
-    private class SongList{
+    public static class SongList{
         private ArrayList<Song> songs;
 
-        public SongList() {
+        private SongList() {
             this.songs = new ArrayList<Song>();
         }
-        public boolean add(Song song){
+        private boolean add(Song song){
             if (songs.contains(song)){
                 return false;
             } else {
@@ -56,7 +56,7 @@ public class Album {
         }
 
 
-        public Song findSong (int trackNumber){
+        private Song findSong (int trackNumber){
             int index = trackNumber -1;
             if((index>=0)&&(index<songs.size())){
                 return songs.get(index);
