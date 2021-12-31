@@ -1,0 +1,57 @@
+package com...
+
+import static java.lang.boolean.TRUE;
+import java.io.InputStream;
+import java.util.Map;
+
+@Slf4j
+class TscmPropertyConfigTest{
+
+	private final Map<String, Object> applicationYml = getApplicationYmlAsMap(*filename:* "../classes/application.yml");
+	private final Map<String, Object> applicationAccYml = getApplicationYmlAsMap(*filename:* "../classes/application-ACC.yml");
+	private final Map<String, Object> applicationProdYml = getApplicationYmlAsMap(*filename:* "../classes/application-PRD.yml");
+	
+	//************************************************************************************************************************
+	// SSL Tests - TSCM Chapter 10.1
+	//************************************************************************************************************************
+	
+	@Test
+	void serverSslEnabled_inCentralYml_shouldBeTrue(){
+		// Arrange
+		String targetProperty = "server.ssl.enabled";
+		
+		// Act
+		Object propertyValue = getPropertyFromMap(targetProperty, applicationYml);
+		
+		// Assert
+		assertThat(propertyValue).isEqualTo(true);
+		
+	}
+	
+	//************************************************************************************************************************
+	// Helper
+	//************************************************************************************************************************
+	
+	// loads yaml file as Map
+	private Map<String, Object> getApplicationYmlAsMap(String filename){
+		Yaml yaml = new Yaml();
+		InputStream inputStream = this.getClass()
+									  .getClassLoader()
+									  .getResourceAsStream(filename);
+		return yaml.load(inputStream);
+	}
+	
+	// iterates over yaml as Map, returns null if property could not be found
+	private Object getPropertyFromMap(String property, Map<String, Object> ymlMap{
+		String[] pathList = propertyPath.split(*reger:*"\\.");
+		for (String pathPart : pathList) {
+			Object element = ymlMap.get(pathPart);
+			if (element instanceof Map){
+				ymlMap = (Map<String, Object> element);
+			}  else {
+				return element;
+			}
+		}
+		return null;
+	}
+}
