@@ -1,11 +1,11 @@
-package config;
+package mvc_basics.mvc_basics.config;
 
+import mvc_basics.mvc_basics.service.AuthenticationService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import service.AuthenticationService;
 
 @Configuration
 @EnableWebSecurity

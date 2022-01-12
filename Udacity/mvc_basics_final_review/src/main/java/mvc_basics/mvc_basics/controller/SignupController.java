@@ -1,13 +1,13 @@
-package controller;
+package mvc_basics.mvc_basics.controller;
 
-import model.User;
+import mvc_basics.mvc_basics.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import service.UserService;
+import mvc_basics.mvc_basics.service.UserService;
 
 @Controller()
 @RequestMapping("/signup")

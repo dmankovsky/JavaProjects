@@ -1,11 +1,11 @@
-package controller;
+package mvc_basics.mvc_basics.controller;
 
-import model.ChatForm;
+import mvc_basics.mvc_basics.model.ChatForm;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import service.MessageService;
+import mvc_basics.mvc_basics.service.MessageService;
 
 @Controller
 @RequestMapping("/chat")

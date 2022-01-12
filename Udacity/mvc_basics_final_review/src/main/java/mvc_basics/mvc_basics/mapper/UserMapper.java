@@ -1,6 +1,6 @@
-package mapper;
+package mvc_basics.mvc_basics.mapper;
 
-import model.User;
+import mvc_basics.mvc_basics.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -11,8 +11,8 @@ public interface UserMapper {
     @Select("select * from users where username = #{username}")
     User getUser (String username);
 
-    @Insert("insert into users values(#{username}, #{salt}, #{password}, #{firstName}, #{lastName})")
-    @Options(useGeneratedKeys = true, keyProperty = "auto_increment")
+    @Insert("insert into users (username, salt, password, firstname, lastname) values(#{username}, #{salt}, #{password}, #{firstName}, #{lastName})")
+    @Options(useGeneratedKeys = true, keyProperty = "userId")
     int insert(User user);
 
 }

@@ -1,4 +1,4 @@
-package model;
+package mvc_basics.mvc_basics.model;
 
 public class ChatForm {
     private String username;

@@ -1,7 +1,7 @@
-package service;
+package mvc_basics.mvc_basics.service;
 
-import mapper.UserMapper;
-import model.User;
+import mvc_basics.mvc_basics.mapper.UserMapper;
+import mvc_basics.mvc_basics.model.User;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

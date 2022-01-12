@@ -1,7 +1,7 @@
-package service;
+package mvc_basics.mvc_basics.service;
 
-import mapper.UserMapper;
-import model.User;
+import mvc_basics.mvc_basics.mapper.UserMapper;
+import mvc_basics.mvc_basics.model.User;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -28,7 +28,7 @@ public class UserService {
         random.nextBytes(salt);
         String encodedSalt = Base64.getEncoder().encodeToString(salt);
         String hashedPassword = hashService.getHashedValue(user.getPassword(), encodedSalt);
-        return userMapper.insert(new User(null, user.getUsername(), encodedSalt, hashedPassword, user.getFirstName(), user.getLastname()));
+        return userMapper.insert(new User(null, user.getUsername(), encodedSalt, hashedPassword, user.getFirstName(), user.getLastName()));
     }
 
     public User getUser(String username) {

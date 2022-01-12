@@ -1,4 +1,4 @@
-package service;
+package mvc_basics.mvc_basics.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

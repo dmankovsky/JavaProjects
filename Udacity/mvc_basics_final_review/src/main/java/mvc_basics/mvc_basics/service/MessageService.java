@@ -1,8 +1,8 @@
-package service;
+package mvc_basics.mvc_basics.service;
 
-import mapper.MessageMapper;
-import model.ChatForm;
-import model.ChatMessage;
+import mvc_basics.mvc_basics.mapper.MessageMapper;
+import mvc_basics.mvc_basics.model.ChatForm;
+import mvc_basics.mvc_basics.model.ChatMessage;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

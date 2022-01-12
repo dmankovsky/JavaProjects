@@ -1,21 +1,29 @@
-package model;
+package mvc_basics.mvc_basics.model;
 
 public class User {
-    private String auto_increment;
+    private Integer userId;
     private String username;
     private String salt;
     private String password;
     private String firstName;
-    private String lastname;
+    private String lastName;
 
-    public User(Integer auto_increment, String username, String salt, String password, String firstName, String lastname) {
+    public User(Integer userId, String username, String salt, String password, String firstName, String lastName) {
+        this.userId = userId;
         this.username = username;
         this.salt = salt;
         this.password = password;
         this.firstName = firstName;
-        this.lastname = lastname;
+        this.lastName = lastName;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getUsername() {
         return username;
@@ -49,20 +57,11 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
-
-//    CREATE TABLE IF NOT EXISTS USERS (
-//        userid INT PRIMARY KEY auto_increment,
-//        username VARCHAR(20),
-//    salt VARCHAR,
-//    password VARCHAR,
-//    firstname VARCHAR(20),
-//    lastname VARCHAR(20)
-//);

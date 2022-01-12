@@ -1,4 +1,4 @@
-package model;
+package mvc_basics.mvc_basics.model;
 
 public class ChatMessage {
     private Integer messageId;

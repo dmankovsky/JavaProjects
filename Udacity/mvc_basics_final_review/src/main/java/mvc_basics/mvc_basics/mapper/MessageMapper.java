@@ -1,6 +1,6 @@
-package mapper;
+package mvc_basics.mvc_basics.mapper;
 
-import model.ChatMessage;
+import mvc_basics.mvc_basics.model.ChatMessage;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
