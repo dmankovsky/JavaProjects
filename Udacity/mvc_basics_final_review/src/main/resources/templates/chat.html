@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,13 +11,13 @@
 <form th:object="${chatForm}" action="#" th:action="@{/chat}" method="POST">
     <label for="messageText">Message Text:</label>
     <input id="messageText" type="text" th:field="*{messageText}">
-    <label for="messageType">Message Type:</label>
+    <label for="messageType">Message Type: </label>
     <select id="messageType" th:field="*{messageType}">
         <option
                 th:each="type : ${allMessageTypes}"
                 th:value="${type}"
                 th:text="${type}"
-            >
+        >
             Say
         </option>
     </select>
