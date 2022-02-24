@@ -6,45 +6,32 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class SignupPage {
-    @FindBy(id = "inputLastName")
-    private WebElement firstName;
 
-    @FindBy(id = "inputLastName")
-    private WebElement lastName;
+    @FindBy(css = "#inputFirstName")
+    private WebElement firstNameField;
 
-    @FindBy(id = "inputUsername")
-    private WebElement userName;
+    @FindBy(css = "#inputLastName")
+    private WebElement lastNameField;
 
-    @FindBy(id = "inputPassword")
-    private WebElement password;
+    @FindBy(css = "#inputUsername")
+    private WebElement usernameField;
 
-    @FindBy(id = "submit-button")
-    private WebElement submit;
+    @FindBy(css = "#inputPassword")
+    private WebElement passwordField;
 
-    public SignupPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    @FindBy(css = "#submit-button")
+    private WebElement submitButton;
+
+    public SignupPage(WebDriver webDriver) {
+        PageFactory.initElements(webDriver, this);
     }
 
-    public void enterFirstName(String string){
-        //firstName.clear();
-        firstName.sendKeys(string);
+    public void signup(String firstName, String lastName, String username, String password) {
+        this.firstNameField.sendKeys(firstName);
+        this.lastNameField.sendKeys(lastName);
+        this.usernameField.sendKeys(username);
+        this.passwordField.sendKeys(password);
+        this.submitButton.click();
     }
-
-    public void enterLastName(String string){
-        //firstName.clear();
-        lastName.sendKeys(string);
-    }
-
-    public void enterUserName(String string){
-        //firstName.clear();
-        userName.sendKeys(string);
-    }
-
-    public void enterPassword(String string){
-        //firstName.clear();
-        password.sendKeys(string);
-        submit.click();
-    }
-
 
 }
