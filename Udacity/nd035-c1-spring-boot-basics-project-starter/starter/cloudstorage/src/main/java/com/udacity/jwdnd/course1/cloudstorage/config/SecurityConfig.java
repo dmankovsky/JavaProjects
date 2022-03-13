@@ -5,9 +5,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import static org.springframework.security.config.annotation.web.AbstractRequestMatcherRegistry.RequestMatchers.antMatchers;
-import static org.springframework.security.config.http.MatcherType.ant;
-
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationService authenticationService;
 
