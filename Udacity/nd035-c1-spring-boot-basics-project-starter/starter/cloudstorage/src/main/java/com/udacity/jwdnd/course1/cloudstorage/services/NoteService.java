@@ -17,18 +17,18 @@ public class NoteService {
     }
 
     @PostConstruct
-    public void postConstruct(){
+    public void postConstruct() {
         System.out.println("Creating NoteService Bean.");
     }
 
-    public void addNote(NoteOverviewForm noteOverviewForm){
+    public void addNote(NoteOverviewForm noteOverviewForm) {
         SingleNote newNote = new SingleNote();
-        newNote.setUsername(NoteOverviewForm.getUsername());
+        newNote.setUsername(noteOverviewForm.getUsername());
         // fill in
-        NoteMapper.addNote(newNote);
+        noteMapper.addNote(newNote);
     }
 
-    public List<SingleNote> getAllNotes(){
-        return NoteMapper.getAllNotes();
+    public List<SingleNote> getAllNotes() {
+        return noteMapper.getAllNotes();
     }
 }
