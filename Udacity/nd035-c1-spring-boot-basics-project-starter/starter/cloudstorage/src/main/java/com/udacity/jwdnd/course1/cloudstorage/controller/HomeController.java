@@ -17,9 +17,13 @@ public class HomeController {
 
     //TODO check https://knowledge.udacity.com/questions/783782 and add respective methods
     @ModelAttribute("newNote")
-    public NoteForm getNoteForm(){
-        return new SingleNote();
+    public NoteOverviewForm getNoteText(){
+        return new SingleNote(); // return something else
     }
 
+    @GetMapping
+    public String homwView(Model model){
+        return "home";
+    }
 
 }
