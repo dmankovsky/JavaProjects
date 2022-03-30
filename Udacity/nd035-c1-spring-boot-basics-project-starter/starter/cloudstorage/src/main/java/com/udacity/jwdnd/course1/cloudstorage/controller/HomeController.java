@@ -18,7 +18,9 @@ public class HomeController {
     //TODO check https://knowledge.udacity.com/questions/783782 and add respective methods
     @ModelAttribute("newNote")
     public NoteOverviewForm getNoteText(){
-        return new SingleNote(); // return something else
+        //return new SingleNote(); // return something else
+        System.out.println("AAA");
+        return new NoteOverviewForm();
     }
 
     @GetMapping
