@@ -23,8 +23,7 @@ public class NoteService {
 
     public void addNote(NoteOverviewForm noteOverviewForm) {
         SingleNote newNote = new SingleNote();
-        newNote.setUsername(noteOverviewForm.getUsername());
-        // fill in
+        newNote.setUserId(noteOverviewForm.getUserId());
         noteMapper.addNote(newNote);
     }
 

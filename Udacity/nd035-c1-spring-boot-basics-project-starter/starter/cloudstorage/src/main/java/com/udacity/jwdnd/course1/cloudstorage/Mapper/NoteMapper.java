@@ -10,7 +10,7 @@ public interface NoteMapper {
     @Select("select * from notes")
     List<SingleNote> getAllNotes(); // add this method in NoteService
 
-    @Insert("insert into notes (username, noteText) values (#{username},#{noteText})")
+    @Insert("insert into notes (userName, noteTitle, noteText) values (#{userName},#{noteTitle},#{noteText})")
     @Options(useGeneratedKeys = true, keyProperty = "noteId")
     int addNote(SingleNote singleNote); // add this method in NoteService
 
