@@ -4,7 +4,7 @@ public class SingleNote {
     private Integer noteId;
     private Integer userId;
     private String noteTitle;
-    private String noteText;
+    private String noteDescription;
 
     public Integer getNoteId() {
         return noteId;
@@ -30,11 +30,11 @@ public class SingleNote {
         this.noteTitle = noteTitle;
     }
 
-    public String getNoteText() {
-        return noteText;
+    public String getNoteDescription() {
+        return noteDescription;
     }
 
-    public void setNoteText(String noteText) {
-        this.noteText = noteText;
+    public void setNoteDescription(String noteDescription) {
+        this.noteDescription = noteDescription;
     }
 }
