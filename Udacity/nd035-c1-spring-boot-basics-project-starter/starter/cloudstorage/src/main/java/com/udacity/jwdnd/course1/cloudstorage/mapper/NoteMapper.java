@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.course1.cloudstorage.Mapper;
+package com.udacity.jwdnd.course1.cloudstorage.mapper;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.SingleNote;
 import org.apache.ibatis.annotations.*;
