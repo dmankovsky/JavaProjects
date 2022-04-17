@@ -33,7 +33,7 @@
                                 <input type="file" class="form-control-file" id="fileUpload" name="fileUpload">
                             </div>
                             <div class="col-sm-4">
-                                <button type="submit" class="btn btn-dark" id="uploadButton">Upload</button>
+                                <button id="btnFileUpload" type="submit" class="btn btn-dark">Upload</button>
                             </div>
                         </div>
                     </div>
@@ -50,9 +50,7 @@
                         <tr>
                             <td>
                                 <a target="_blank" class="btn btn-success">View</a>
-                                <a  class="btn btn-danger" id="deleteFileButton"
-                                    th:href="@{/file/deletefile/{fileId}(fileId=${file.fileId})}"
-                                >Delete</a>
+                                <a  class="btn btn-danger">Delete</a>
                             </td>
                             <th id="fileUploadName" scope="row" th:text="${file.fileName}">ExampleFile.txt</th>
                         </tr>
@@ -82,7 +80,7 @@
                                         th:onclick="showNoteModal(this.getAttribute('dataId'), this.getAttribute('dataTitle'), this.getAttribute('dataDescription'))"
                                 >Edit</button>
                                 <a class="btn btn-danger" id="deleteNoteButton"
-                                    th:href="@{/note/deleteNote/{noteId}(noteId=${note.noteId})}"
+                                   th:href="@{/note/deletenote/{noteId}(noteId=${note.noteId})}"
                                 >Delete</a>
                             </td>
                             <th th:text="${note.noteTitle}" scope="row">Example Note Title</th>

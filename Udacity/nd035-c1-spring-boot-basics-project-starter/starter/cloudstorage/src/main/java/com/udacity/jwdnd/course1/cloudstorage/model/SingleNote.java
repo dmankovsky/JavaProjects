@@ -6,7 +6,7 @@ public class SingleNote {
     private String noteDescription;
     private Integer userId;
 
-    public SingleNote(int i, String noteTitle, String noteDescription, int userId) {
+    public SingleNote(Integer noteId, String noteTitle, String noteDescription, int userId) {
         this.noteId = noteId;
         this.noteTitle = this.noteTitle;
         this.noteDescription = this.noteDescription;
@@ -21,7 +21,7 @@ public class SingleNote {
         return noteId;
     }
 
-    public void setNoteId(int noteId) {
+    public void setNoteId(Integer noteId) {
         this.noteId = noteId;
     }
 
