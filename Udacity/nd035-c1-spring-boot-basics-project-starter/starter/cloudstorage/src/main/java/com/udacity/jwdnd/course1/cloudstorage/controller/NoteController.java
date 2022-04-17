@@ -26,7 +26,7 @@ public class NoteController {
 
     @PostMapping("/addnote")
     public String addOrEditNote(@ModelAttribute SingleNote note, Model model, Authentication authentication) {
-        int userFromId = userService.getUserId(authentication.getName());
+        int userFromId = userService.getUserFromId(authentication.getName());
         Optional<Integer> noteId = Optional.ofNullable(note.getNoteId());
         if (noteId.isEmpty()) {
             return addNote(note, model, userFromId);
