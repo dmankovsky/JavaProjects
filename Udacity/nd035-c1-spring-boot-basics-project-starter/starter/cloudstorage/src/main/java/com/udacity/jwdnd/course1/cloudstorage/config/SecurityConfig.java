@@ -12,19 +12,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationService authenticationService;
 
-    public SecurityConfig(AuthenticationService authenticationService) {
+    public SecurityConfig (AuthenticationService authenticationService){
         this.authenticationService = authenticationService;
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
+    protected void configure(AuthenticationManagerBuilder auth){
         auth.authenticationProvider(this.authenticationService);
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/signup", "/css/**", "/js/**").permitAll()
+                .antMatchers("/signup","/css/**","/js/**").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin()
@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
 
         http.formLogin()
-                .defaultSuccessUrl("/home", true);
+                .defaultSuccessUrl("/home",true);
 
         http.logout(logout->logout
                 .logoutUrl("/home/logout")

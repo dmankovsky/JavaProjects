@@ -8,9 +8,9 @@ public class SingleNote {
 
     public SingleNote(Integer noteId, String noteTitle, String noteDescription, int userId) {
         this.noteId = noteId;
-        this.noteTitle = this.noteTitle;
-        this.noteDescription = this.noteDescription;
-        this.userId = this.userId;
+        this.noteTitle = noteTitle;
+        this.noteDescription = noteDescription;
+        this.userId = userId;
     }
 
     public SingleNote() {
