@@ -20,32 +20,35 @@ public class HomeController {
 
     private final UserService userService;
     private final NoteService noteService;
+    private final EncryptionService encryptionService;
 
-
-    public HomeController(UserService userService,
-                          NoteService noteService
-                          ) {
+    public HomeController(UserService userService, NoteService noteService, EncryptionService encryptionService) {
         this.userService = userService;
         this.noteService = noteService;
+        this.encryptionService = encryptionService;
     }
 
     List<SingleNote>notes;
-    List<File>files;
+
+    //TODO check https://knowledge.udacity.com/questions/783782 and add respective methods
+    //TODO modify the rest of home controller - key to everything
 
     @PostConstruct
     public void postConstruct(){
         notes = new ArrayList<>();
-
     }
 
     @GetMapping
-    public String getHome(Model model, Authentication authentication){
-        Integer userFromId = userService.getUserFromId(authentication.getName());
-        notes = noteService.getNotesFromUserId(userFromId);
+    public String homeView(Model model, Authentication authentication){
+        Integer userId = userService.getUserId(authentication.getName());
+        notes = noteService.getAllNotesForUser(userId);
 
         model.addAttribute("note", new SingleNote());
         model.addAttribute("notes", notes);
 
+        model.addAttribute("encryptionService", encryptionService);
+
         return "home";
     }
+
 }
