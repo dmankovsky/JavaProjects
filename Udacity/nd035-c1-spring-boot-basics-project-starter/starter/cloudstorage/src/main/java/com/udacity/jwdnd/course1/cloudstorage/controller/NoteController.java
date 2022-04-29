@@ -54,7 +54,7 @@ public class NoteController {
         return "result";
     }
 
-    @GetMapping("/deletenote/{noteId:.+}")
+    @GetMapping("/deleteNote/{noteId:.+}")
     public String deleteNote(@PathVariable Integer noteId, Model model){
         return displayResult(model, noteService.deleteNote(noteId));
     }

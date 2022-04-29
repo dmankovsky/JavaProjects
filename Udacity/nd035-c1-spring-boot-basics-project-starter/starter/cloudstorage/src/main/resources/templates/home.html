@@ -78,6 +78,7 @@
                                         th:dataId="${note.noteId}" th:dataTitle="${note.noteTitle}"
                                         th:dataDescription="${note.noteDescription}"
                                         th:onclick="this.getAttribute('dataId'), this.getAttribute('dataTitle'), this.getAttribute('dataDescription'))"
+                                        th:href="@{/note/editNote/{noteId}(noteId=${note.noteId})}"
                                 >Edit</button>
                                 <a class="btn btn-danger" id="deleteNoteButton"
                                    th:href="@{/note/deleteNote/{noteId}(noteId=${note.noteId})}"
