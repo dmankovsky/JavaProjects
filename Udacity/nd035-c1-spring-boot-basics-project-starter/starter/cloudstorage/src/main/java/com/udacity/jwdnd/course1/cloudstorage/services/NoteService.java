@@ -24,8 +24,8 @@ public class NoteService {
         System.out.println("Creating NoteService Bean.");
     }
 
-    public int addNote(SingleNote note, int userId){
-        return noteMapper.addNote(new SingleNote(0, note.getNoteTitle(), note.getNoteDescription(), userId));
+    public int addNote(SingleNote note, int userid){
+        return noteMapper.addNote(new SingleNote(0, note.getNotetitle(), note.getNotedescription(), userid));
     }
 
     public int editNote(SingleNote note) {return noteMapper.editNote(note);}

@@ -7,19 +7,19 @@ import java.util.List;
 
 @Mapper
 public interface NoteMapper {
-    @Select("select * from notes where userId = #{userId}")
-    List<SingleNote> getAllNotesForUser(Integer userId); // add this method in NoteService
+    @Select("select * from notes where userid = #{userid}")
+    List<SingleNote> getAllNotesForUser(Integer userid); // add this method in NoteService
 
-    @Insert("insert into notes (noteTitle, noteDescription, userId) values (#{noteTitle}, #{noteDescription}, #{userId})")
-    @Options(useGeneratedKeys = true, keyProperty = "noteId")
+    @Insert("insert into notes (notetitle, notedescription, userid) values (#{notetitle}, #{notedescription}, #{userid})")
+    @Options(useGeneratedKeys = true, keyProperty = "noteid")
     int addNote(SingleNote singleNote); // add this method in NoteService
 
-    @Update("update notes set noteText = #{noteDescription} where noteId = #{noteId}")
+    @Update("update notes set notedescription = #{notedescription} where noteid = #{noteid}")
     int editNote(SingleNote singleNote); // add this method in NoteService
 
-    @Select("select * from notes where userId=#{userId} and noteTitle=#{noteTitle} and noteDescription=#{noteDescription}")
-    SingleNote isOnlyNote(Integer userId, String noteTitle, String noteDescription);
+    @Select("select * from notes where userid=#{userid} and notetitle=#{notetitle} and notedescription=#{notedescription}")
+    SingleNote isOnlyNote(Integer userid, String notetitle, String notedescription);
 
-    @Delete("delete from notes where noteId = #{noteId}")
-    int deleteNote(Integer noteId);
+    @Delete("delete from notes where noteid = #{noteid}")
+    int deleteNote(Integer noteid);
 }
