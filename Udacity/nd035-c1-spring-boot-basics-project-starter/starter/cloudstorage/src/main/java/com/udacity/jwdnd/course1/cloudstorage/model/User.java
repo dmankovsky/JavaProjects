@@ -11,8 +11,8 @@ public class User {
 
     public User(){}
 
-    public User(Integer userid, String username, String salt, String password, String firstName, String lastName) {
-        this.userid = userid;
+    public User(Integer userId, String username, String salt, String password, String firstName, String lastName) {
+        this.userid = userId;
         this.username = username;
         this.salt = salt;
         this.password = password;
@@ -20,12 +20,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Integer getUserId() {
+    public Integer getUserid() {
         return userid;
     }
 
-    public void setUserId(Integer userId) {
-        this.userid = userId;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     public String getUsername() {
