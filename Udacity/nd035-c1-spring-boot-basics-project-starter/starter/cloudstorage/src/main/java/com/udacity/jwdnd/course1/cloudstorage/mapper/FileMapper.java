@@ -27,5 +27,5 @@ public interface FileMapper {
 
     // get by file id
     @Select("select * from files where fileId=#{fileid}")
-    List<File> getFileByFileId(int fileid);
+    File getFileByFileId(int fileid);
 }
