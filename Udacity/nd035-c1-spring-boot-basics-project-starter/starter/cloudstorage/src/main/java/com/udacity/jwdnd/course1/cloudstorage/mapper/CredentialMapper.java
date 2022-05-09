@@ -7,8 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface CredentialMapper {
-    //addCredential
 
+    //addCredential
     @Insert("insert into credentials (credentialid, url, username, key, password, userid)" +
             ("values(#{credentialid}, #{url}, #{username}, #{key}, #{password}, #{userid})"))
     @Options(useGeneratedKeys = true, keyProperty = "credentialid")
@@ -28,6 +28,6 @@ public interface CredentialMapper {
     Credential isOnlyUsername(Integer userid, String username);
 
     //getFromUserId
-    @Select("select * from credentials where userid=#{userid}")
+    @Select("select * from files where userid=#{userid}")
     List<Credential> getFromUserId(int userid);
 }
