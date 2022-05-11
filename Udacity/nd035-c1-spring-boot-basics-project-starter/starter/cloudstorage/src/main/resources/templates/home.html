@@ -52,7 +52,7 @@
                         <tbody th:each="file : ${files}">
                         <tr>
                             <td>
-                                <a target="_blank" class="btn btn-success" th:href="@{/file/viewfile/{fileId}(fileId=${file.fileId})}"
+                                <a target="_blank" class="btn btn-success" id="viewFileButton"th:href="@{/file/viewfile/{fileId}(fileId=${file.fileId})}"
                                 >View</a>
                                 <a class="btn btn-danger" id="deleteFileButton" th:href="@{/file/deletefile/{fileId}(fileId=${file.fileId})}"
                                 >Delete</a>
