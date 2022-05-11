@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 // TODO: complete section. appears complete
+@Mapper
 public interface FileMapper {
     // add file
     @Insert("insert into files (fileId, fileName, contentType, fileSize, userId, fileData)" +

@@ -28,6 +28,6 @@ public interface CredentialMapper {
     Credential isOnlyUsername(Integer userid, String username);
 
     //getFromUserId
-    @Select("select * from files where userid=#{userid}")
+    @Select("select * from credentials where userid=#{userid}")
     List<Credential> getFromUserId(int userid);
 }
