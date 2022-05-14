@@ -31,4 +31,20 @@ public class HelperMethods {
         webdriver.findElement(element).sendKeys(text);
     }
 
+    public void clickElement(By element){
+        waitUntilElementClickable(element);
+        webdriver.findElement(element).click();
+    }
+
+    public void threadSleepSeconds(int seconds){
+        try{
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException ie){
+        }
+    }
+
+    public String getElementText(By element){
+        return webdriver.findElement(element).getText();
+    }
+
 }
