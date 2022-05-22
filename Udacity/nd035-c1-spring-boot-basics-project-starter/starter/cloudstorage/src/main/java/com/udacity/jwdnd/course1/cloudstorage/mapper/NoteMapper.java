@@ -14,7 +14,7 @@ public interface NoteMapper {
     @Options(useGeneratedKeys = true, keyProperty = "noteid")
     int addNote(SingleNote singleNote); // add this method in NoteService
 
-    @Update("update notes set notedescription = #{notedescription} where noteid = #{noteid}")
+    @Update("update notes set notetitle = #{notetitle}, notedescription = #{notedescription} where noteid = #{noteid}")
     int editNote(SingleNote singleNote); // add this method in NoteService
 
     @Select("select * from notes where userid=#{userid} and notetitle=#{notetitle} and notedescription=#{notedescription}")

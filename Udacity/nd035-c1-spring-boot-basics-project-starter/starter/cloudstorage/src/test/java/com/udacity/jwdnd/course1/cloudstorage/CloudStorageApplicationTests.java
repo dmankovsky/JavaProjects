@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
+import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
@@ -11,8 +12,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 import java.io.File;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CloudStorageApplicationTests {
 
@@ -20,6 +24,9 @@ class CloudStorageApplicationTests {
 	private int port;
 
 	private WebDriver driver;
+
+	private TestNote testNote;
+	private TestCredential testCredential;
 
 	@BeforeAll
 	static void beforeAll() {
@@ -29,6 +36,9 @@ class CloudStorageApplicationTests {
 	@BeforeEach
 	public void beforeEach() {
 		this.driver = new ChromeDriver();
+		testNote = new TestNote(driver);
+		testCredential = new TestCredential(driver);
+		//WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
 	}
 
 	@AfterEach
@@ -86,7 +96,7 @@ class CloudStorageApplicationTests {
 		// You may have to modify the element "success-msg" and the sign-up 
 		// success message below depening on the rest of your code.
 		*/
-		Assertions.assertTrue(driver.findElement(By.id("success-msg")).getText().contains("You successfully signed up!"));
+		Assertions.assertTrue(driver.findElement(By.id("successMsgTest")).getText().contains("You've successfully signed up!"));
 	}
 
 	
@@ -192,7 +202,7 @@ class CloudStorageApplicationTests {
 		WebElement uploadButton = driver.findElement(By.id("uploadButton"));
 		uploadButton.click();
 		try {
-			webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("success")));
+			webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("saveSuccessMsg")));
 		} catch (org.openqa.selenium.TimeoutException e) {
 			System.out.println("Large File upload failed");
 		}
@@ -200,6 +210,90 @@ class CloudStorageApplicationTests {
 
 	}
 
+	// test note functionality
+	@Test
+	public void testAddNote(){
+		doMockSignUp("AddNote","Test","AN","123");
+		doLogIn("AN", "123");
+		WebDriverWait webDriverWait = new WebDriverWait(driver, 102);
 
+		driver.findElement(By.id("nav-notes-tab")).click();
+		//WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("addANewNoteButton")));
+		testNote.addNote("Test title", "Test description");
+		//testNote.clickToReturnToHomePage();
+//		try {
+//			webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.id("saveSuccessMsg")));
+//		} catch (org.openqa.selenium.TimeoutException e) {
+//			System.out.println("Note not added. Error.");
+//		}
+		//assertFalse(driver.getPageSource().contains("Error"));
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-notes-tab")));
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("nav-notes-tab")));
+		driver.findElement(By.id("nav-notes-tab")).click();
+		testNote.threadSleepSeconds(2);
+		assertEquals("Test title",testNote.getTitle());
+		assertEquals("Test description",testNote.getDescription());
+	}
+
+	@Test
+	public void testEditNote(){
+		doMockSignUp("EditNote","Test","EN","123");
+		doLogIn("EN", "123");
+		WebDriverWait webDriverWait = new WebDriverWait(driver, 22);
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-notes-tab")));
+		driver.findElement(By.id("nav-notes-tab")).click();
+		//webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("addANewNoteButton")));
+		testNote.addNote("Test title", "Test description");
+		//driver.findElement(By.id("nav-notes-tab")).click();
+		//webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("editNoteButton")));
+		//driver.findElement(By.id("editNoteButton")).click();
+		testNote.editNote("Test edit title", "Test edit description");
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-notes-tab")));
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("nav-notes-tab")));
+		driver.findElement(By.id("nav-notes-tab")).click();
+		testNote.threadSleepSeconds(2);
+		assertEquals("Test edit title",testNote.getTitle());
+		assertEquals("Test edit description",testNote.getDescription());
+	}
+
+	@Test
+	public void testDeleteNote(){
+		doMockSignUp("DeleteNote","Test","DN","123");
+		doLogIn("DN", "123");
+		WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
+
+		driver.findElement(By.id("nav-notes-tab")).click();
+		//webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("addANewNoteButton")));
+		testNote.addNote("Test delete title", "Test delete description");
+		//testNote.clickToReturnToHomePage();
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-notes-tab")));
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("nav-notes-tab")));
+		driver.findElement(By.id("nav-notes-tab")).click();
+		testNote.threadSleepSeconds(2);
+		testNote.deleteNote();
+		assertEquals(0, testNote.getNoOfNotes());
+	}
+
+	// credential functionality
+	@Test
+	public void addCredential(){
+		doMockSignUp("AddCredential","Test","AC","123");
+		doLogIn("AC", "123");
+		WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
+		driver.findElement(By.id("nav-credentials-tab")).click();
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("addANewCredentialButton")));
+		testCredential.addCredential("testurl", "testusername", "testpassword");
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-notes-tab")));
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("nav-notes-tab")));
+		driver.findElement(By.id("nav-credentials-tab")).click();
+		testNote.threadSleepSeconds(2);
+		// write separate get method for each, analogous to note
+		assertEquals("testurl",testCredential.get());
+		assertEquals("testusername",testCredential.getDescription());
+		assertEquals("testpassword",testCredential.getDescription());
+	}
+
+	// file functionality
 
 }

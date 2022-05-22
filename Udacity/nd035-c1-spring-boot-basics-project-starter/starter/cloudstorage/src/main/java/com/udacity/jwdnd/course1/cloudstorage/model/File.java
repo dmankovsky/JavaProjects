@@ -21,6 +21,9 @@ public class File {
         this.fileData = fileData;
     }
 
+    public File(String fileName) {
+    }
+
     public Integer getFileId() {
         return fileId;
     }
