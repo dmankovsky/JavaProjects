@@ -121,7 +121,7 @@ public class TestNote {
     // get title
     public String getTitle(){
         //return hm.getElementText(mainNoteTitle);
-        return webDriver.findElement(mainNoteTitle).getText();
+        return getElementText(mainNoteTitle);
     }
     // get description
     public String getDescription(){

@@ -64,24 +64,48 @@ public class TestCredential {
         webDriver.findElement(element).sendKeys(text);
     }
 
-    // fix it
     public void editCredential(String url, String username, String password){
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, 2);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(addANewCredentialButton));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(addANewCredentialButton));
         WebElement addANewCredentialButton = webDriver.findElement(By.id("addANewCredentialButton"));
         addANewCredentialButton.click();
         inputCredential(url, username, password);
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("saveSuccessMsg")));
         webDriver.findElement(By.id("saveSuccessMsg")).click();
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("logoutButton")));
-
+        //webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("logoutButton")));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(navCredentialsTab));
+        webDriver.findElement(navCredentialsTab).click();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(editCredentialButton));
+        webDriver.findElement(editCredentialButton).click();
+        String newUrl = "newUrl";
+        String newUsername = "newUsername";
+        String newPassword = "newPassword";
+        inputCredential(newUrl, newUsername, newPassword);
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("saveSuccessMsg")));
+        webDriver.findElement(By.id("saveSuccessMsg")).click();
     }
 
     public void deleteCredential(){
-        WebElement deleteCredentialButton = webDriver.findElement(By.id("deleteCredentialButton"));
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver, 2);
+        WebElement deleteCredentialButton = webDriver.findElement(this.deleteCredentialButton);
         deleteCredentialButton.click();
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("saveSuccessMsg")));
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("saveSuccessMsg")));
         webDriver.findElement(By.id("saveSuccessMsg")).click();
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("logoutButton")));
+        //webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("logoutButton")));
+    }
+
+    public String getUrl(){
+        return webDriver.findElement(credentialUrl).getText();
+    }
+
+    public String getUsername(){
+        return webDriver.findElement(credentialUsername).getText();
+    }
+
+    public String getPassword(){
+        return webDriver.findElement(credentialPassword).getText();
     }
 
     public String getElementText(By element){

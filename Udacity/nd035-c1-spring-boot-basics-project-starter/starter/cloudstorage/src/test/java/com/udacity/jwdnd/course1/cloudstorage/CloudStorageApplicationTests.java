@@ -129,6 +129,19 @@ class CloudStorageApplicationTests {
 
 	}
 
+	@Test
+	public void testLoginAndSignUp(){
+		doMockSignUp("LoginAndSignup","Test","LS","123");
+		doLogIn("LS", "123");
+		Assertions.assertTrue(driver.getTitle().contains("Home"));
+		WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("logoutButton")));
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("logoutButton")));
+		driver.findElement(By.id("logoutButton")).click();
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-button")));
+		Assertions.assertFalse(driver.getTitle().contains("Home"));
+	}
+
 	/**
 	 * PLEASE DO NOT DELETE THIS TEST. You may modify this test to work with the 
 	 * rest of your code. 
@@ -284,16 +297,52 @@ class CloudStorageApplicationTests {
 		driver.findElement(By.id("nav-credentials-tab")).click();
 		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("addANewCredentialButton")));
 		testCredential.addCredential("testurl", "testusername", "testpassword");
-		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-notes-tab")));
-		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("nav-notes-tab")));
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-credentials-tab")));
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("nav-credentials-tab")));
 		driver.findElement(By.id("nav-credentials-tab")).click();
 		testNote.threadSleepSeconds(2);
 		// write separate get method for each, analogous to note
-		assertEquals("testurl",testCredential.get());
-		assertEquals("testusername",testCredential.getDescription());
-		assertEquals("testpassword",testCredential.getDescription());
+		assertEquals("testurl",testCredential.getUrl());
+		assertEquals("testusername",testCredential.getUsername());
+		assertNotEquals("testpassword",testCredential.getPassword());
 	}
 
-	// file functionality
+	@Test
+	public void editCredential(){
+		doMockSignUp("EditCredential","Test","EC","123");
+		doLogIn("EC", "123");
+		WebDriverWait webDriverWait = new WebDriverWait(driver, 22);
+		driver.findElement(By.id("nav-credentials-tab")).click();
+		String url = "testUrl";
+		String username = "testUsername";
+		String password = "testPassword";
+		testCredential.editCredential(url, username, password);
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-credentials-tab")));
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("nav-credentials-tab")));
+		driver.findElement(By.id("nav-credentials-tab")).click();
+		testNote.threadSleepSeconds(2);
+		assertEquals("newUrl",testCredential.getUrl());
+		assertEquals("newUsername",testCredential.getUsername());
+		assertNotEquals("newPassword",testCredential.getPassword());
+	}
+	@Test
+	public void deleteCredential(){
+		doMockSignUp("DeleteCredential","Test","DC","123");
+		doLogIn("DC", "123");
+		WebDriverWait webDriverWait = new WebDriverWait(driver, 2);
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-credentials-tab")));
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("nav-credentials-tab")));
+		driver.findElement(By.id("nav-credentials-tab")).click();
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("addANewCredentialButton")));
+		testCredential.addCredential("testurl", "testusername", "testpassword");
+		webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("nav-credentials-tab")));
+		webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id("nav-credentials-tab")));
+		driver.findElement(By.id("nav-credentials-tab")).click();
+		testNote.threadSleepSeconds(2);
+		testCredential.deleteCredential();
+		assertEquals(0, testCredential.getCountOfCredentials());
+	}
+
+
 
 }
