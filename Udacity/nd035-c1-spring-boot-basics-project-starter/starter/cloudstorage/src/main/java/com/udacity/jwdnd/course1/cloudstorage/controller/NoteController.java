@@ -23,18 +23,17 @@ public class NoteController {
         this.noteService = noteService;
     }
 
-
     @PostMapping("/addnote")
     public String addOrEditNote(@ModelAttribute SingleNote note, Model model, Authentication authentication) {
-        int userFromId = userService.getUserFromId(authentication.getName());
-        Optional<Integer> noteId = Optional.ofNullable(note.getNoteId());
+        int userFromId = userService.getUserId(authentication.getName());
+        Optional<Integer> noteId = Optional.ofNullable(note.getNoteid());
         if (noteId.isEmpty()) {
             return addNote(note, model, userFromId);
         } else return editNote(note, model, userFromId);
     }
 
     private String addNote(SingleNote note, Model model, int userFromId){
-        if(noteService.isOnlyNote(userFromId, note.getNoteTitle(), note.getNoteDescription())){
+        if(noteService.isOnlyNote(userFromId, note.getNotetitle(), note.getNotedescription())){
             return displayResult(model, noteService.addNote(note, userFromId));
         } else{
             return displayOtherErrorMsg( "Note already exists", model);
@@ -42,7 +41,7 @@ public class NoteController {
     }
 
     private String editNote(SingleNote note, Model model, int userFromId){
-        if(noteService.isOnlyNote(userFromId, note.getNoteTitle(), note.getNoteDescription())){
+        if(noteService.isOnlyNote(userFromId, note.getNotetitle(), note.getNotedescription())){
             return displayResult(model, noteService.editNote(note));
         } else{
             return displayOtherErrorMsg( "Note already exists", model);
@@ -54,7 +53,7 @@ public class NoteController {
         return "result";
     }
 
-    @GetMapping("/deletenote/{noteId:.+}")
+    @GetMapping("/deleteNote/{noteId:.+}")
     public String deleteNote(@PathVariable Integer noteId, Model model){
         return displayResult(model, noteService.deleteNote(noteId));
     }

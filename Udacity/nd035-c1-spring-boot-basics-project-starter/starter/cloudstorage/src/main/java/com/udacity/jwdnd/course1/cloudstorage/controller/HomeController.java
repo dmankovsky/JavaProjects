@@ -20,32 +20,51 @@ public class HomeController {
 
     private final UserService userService;
     private final NoteService noteService;
+    private final EncryptionService encryptionService;
+    private final CredentialService credentialService;
+    private final FileService fileService;
 
-
-    public HomeController(UserService userService,
-                          NoteService noteService
-                          ) {
+    public HomeController(UserService userService, NoteService noteService, EncryptionService encryptionService, CredentialService credentialService, FileService fileService) {
         this.userService = userService;
         this.noteService = noteService;
+        this.encryptionService = encryptionService;
+        this.credentialService = credentialService;
+        this.fileService = fileService;
     }
 
     List<SingleNote>notes;
+    List<Credential>credentials;
+    List<String>decryptedPasswords;
     List<File>files;
+
+    //TODO check https://knowledge.udacity.com/questions/783782 and add respective methods
+    //TODO modify the rest of home controller - key to everything
 
     @PostConstruct
     public void postConstruct(){
         notes = new ArrayList<>();
-
+        files = new ArrayList<>();
+        credentials = new ArrayList<>();
+        decryptedPasswords = new ArrayList<>();
     }
 
     @GetMapping
-    public String getHome(Model model, Authentication authentication){
-        Integer userFromId = userService.getUserFromId(authentication.getName());
-        notes = noteService.getNotesFromUserId(userFromId);
+    public String homeView(Model model, Authentication authentication){
+        Integer userFromId = userService.getUserId(authentication.getName());
+        notes = noteService.getAllNotesForUser(userFromId);
+        files = fileService.getFilesFromUserId(userFromId);
+        credentials = credentialService.getCredentialFromUserId(userFromId);
+        decryptedPasswords = credentialService.getDecryptedPasswordsFromUserId(userFromId);
 
         model.addAttribute("note", new SingleNote());
         model.addAttribute("notes", notes);
+        model.addAttribute("credential" , new Credential());
+        model.addAttribute("credentials" , credentials);
+        model.addAttribute("credentialService", credentialService);
+        model.addAttribute("encryptionService", encryptionService);
+        model.addAttribute("files", files);
 
         return "home";
     }
+
 }

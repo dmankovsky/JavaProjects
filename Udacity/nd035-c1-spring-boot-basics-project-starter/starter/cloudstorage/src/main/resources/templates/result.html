@@ -18,5 +18,10 @@
         <span th:text="${fileErrorMsgText}">Select file to upload first.</span>
         <span>Click <a th:id="fileError" th:href="@{/home}">here</a> to continue.</span>
     </div>
+    <div th:if="${notSavedErrorMsg}" class="alert alert-danger fill-parent">
+        <h1 class="display-5">Error</h1>
+        <span th:text="${fileErrorMsgText}">File was not saved.</span>
+        <span>Click <a th:id="fileError" th:href="@{/home}">here</a> to continue.</span>
+    </div>
     </body>
 </html>
