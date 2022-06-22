@@ -1,4 +1,3 @@
-
 INSERT INTO location (id, name, address) VALUES (1, 'ATL Airport','Atlanta airport location');
 INSERT INTO location (id, name, address) VALUES (2, 'MIA Airport','Miami airport location');
 INSERT INTO location (id, name, address) VALUES (3, 'LAX Airport','Los Angeles airport location');
