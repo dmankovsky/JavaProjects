@@ -1,5 +1,6 @@
 package com.graphqlapi.graphql.mutator;
 
+import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.graphqlapi.graphql.entity.Location;
 import com.graphqlapi.graphql.exception.LocationNotFoundException;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class Mutation implements GraphQLQueryResolver {
+public class Mutation implements GraphQLMutationResolver {
     private LocationRepository locationRepository;
 
     public Mutation(LocationRepository locationRepository) {
