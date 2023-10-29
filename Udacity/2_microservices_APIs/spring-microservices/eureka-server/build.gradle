@@ -10,6 +10,9 @@ sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
+    maven{
+        url = uri('https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl')
+    }
 }
 
 ext {
@@ -18,6 +21,14 @@ ext {
 
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+// https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl
+    //implementation 'com.sun.xml.bind:jaxb-impl:2.2.3-1'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
+    //compile "javax.xml.bind:jaxb-api:2.4.0-b180725.0427"
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
 }
 
 dependencyManagement {
